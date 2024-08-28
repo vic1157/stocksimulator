@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+	<div class="container ">
+		<h3> History </h3>
+		<table class="table mt-5">
+			<thead>
+				<tr>
+					<th> Stock </th>
+					<th> Shares Bought/Sold </th>
+					<th> Transaction Price </th>
+					<th> Transaction Type </th>
+				<tr>
+			<thead>
+			<tbody>
+				{% for stock in stocks %}
+					<tr>
+						<td> {{ stock.stock }} </td>
+						<td> {{ stock.share_amt }} </td>
+                        <td> {{ stock.price }} </td>
+                        <td> {{ stock.type }} </td>
+					</tr>
+                {% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

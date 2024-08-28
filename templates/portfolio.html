@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+	<div class="container ">
+		<h3> Portfolio </h3>
+		<table class="table mt-5">
+			<thead>
+				<tr>
+					<th> Stock </th>
+					<th> Shares Owned </th>
+					<th> Buy Shares </th>
+					<th> Sell Shares </th>
+					<th> Share Price </th>
+					<th> Current Holdings </th>
+				<tr>
+			<thead>
+			<tbody>
+				{% for stock in stocks_info %}
+					<tr>
+						<td> {{ stock }} </td>
+						<td> {{ stocks_info[stock][0] }} </td>
+						<td>
+							<form action="/" method="post" class="my-1">
+					       		<div class="row justify-content-center">
+			            			<div class="col-5">
+					            		<input name="stock_buy" type="hidden" value="{{ stock }}">
+			               	 			<input autocomplete="off" autofocus class="form-control" name="buy_shares" placeholder="Enter Stock" type="text">
+			            			</div>
+			            			<div class="col-5">
+			                			<button class="btn btn-success" type="submit">Buy Shares</button>
+			            			</div>
+				        		</div>
+					    	</form>
+						</td>
+						<td>
+							<form action="/" method="post" class="my-1">
+								<div class="row justify-content-center">
+							 		<div class="col-5">
+									 	<input name="stock_sell" type="hidden" value="{{ stock }}">
+									 	<input name="stock_price" type="hidden" value="{{ stocks_info[stock][1] }}">
+								 		<input autocomplete="off" autofocus class="form-control" name="shares_sell" placeholder="Enter Stock" type="text">
+							 		</div>
+									<div class="col-5">
+										<button class="btn btn-danger" type="submit">Sell Shares</button>
+									</div>
+								</div>
+							</form>
+						</td>
+						<td> {{ stocks_info[stock][1] | usd }} </td>
+						<td> {{ stocks_info[stock][2] }} </td>
+					</tr>
+				{% endfor %}
+					<tr>
+						<td></td>
+						<td> </td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td> </td>
+						<td></td>
+						<td></td>
+						<td class="fw-bold h5 text-start" > Total Stock Value: </td>
+						<td class="h5"> {{ total_val }}</td>
+					</tr>
+					<tr>
+                        <td></td>
+                        <td> </td>
+						<td></td>
+						<td></td>
+                        <td class="fw-bold h5 text-start" > Total Cash: </td>
+                        <td class="h5"> {{ cash }}</td>
+					</tr>
+					<tr>
+                        <td></td>
+                        <td> </td>
+						<td></td>
+						<td></td>
+                        <td class="fw-bold h5 text-start"> Grand Total: </td>
+                        <td class="h5" > {{ grand_total }}</td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
